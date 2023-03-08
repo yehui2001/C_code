@@ -4,7 +4,7 @@
 int main(int argc, char *argv[])
 {
   // 请在此输入您的代码
-  printf("请输入学生的人数:");
+  //printf("请输入学生的人数:");
   int N;
   scanf("%d",&N);
 
