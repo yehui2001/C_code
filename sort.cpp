@@ -1,7 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-/*
+#include<iostream>
+#include<cmath>
+using namespace std;
+
 int sum_digit(int n){
     int sum = 0,i = 0,j = 0,num = n,temp;
     while(n > 0){
@@ -16,22 +16,21 @@ int sum_digit(int n){
     }
     return sum;
 }
-*/
 
-int sum_digit(int n){
-    int sum = 0;
-    while(n){
-        sum=sum+n%10;                    //计算位数之和 
-        n/=10;
-  }
-    return sum;
+int digit(int n){
+    int sum = 0,i = 0,j = 0,num = n,temp;
+    while(n > 0){
+        n = n / 10;
+        i++;
+    }
+    return i;
 }
 
 int main(){
     int n,m,i,j,l,k = 1;
-    scanf("%d",&n);
-    int sort[n];
-    scanf("%d",&m);
+	cin>>n>>endl;
+	int sort[n];
+	cin>>m>>endl; 
     for(j = 1; j <= 54; j++){
         for(i = 1; i <= n; i++){
             if(sum_digit(i) == j){
@@ -39,6 +38,8 @@ int main(){
             }
         }
     }
-    printf("%d\n",sort[m]);
+    cout<<sort[m]<<endl;
     return 0;
 }
+
+
