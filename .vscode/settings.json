@@ -8,7 +8,8 @@
         "array": "c",
         "vector": "c",
         "stdlib.h": "c",
-        "math.h": "c"
+        "math.h": "c",
+        "stdio.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
