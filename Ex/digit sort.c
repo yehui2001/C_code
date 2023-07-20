@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 /*
-int sum_digit(int n){
+int sum_digit(int n){  //时间复杂度过高
     int sum = 0,i = 0,j = 0,num = n,temp;
     while(n > 0){
         n = n / 10;
@@ -21,8 +21,8 @@ int sum_digit(int n){
 int sum_digit(int n){
     int sum = 0;
     while(n){
-        sum=sum+n%10;                    //计算位数之和 
-        n/=10;
+        sum += n%10;                    //计算位数之和 
+        n /= 10;
   }
     return sum;
 }

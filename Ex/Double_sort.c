@@ -21,8 +21,8 @@ void A_order(int *arr,int q,int N){
                 arr[j+1] = arr[j];
                 arr[j] = temp;
             }
-            k++;
         }
+        k++;
     } 
 } 
 
@@ -40,6 +40,7 @@ void D_order(int *arr,int q){
     }
 }
 
+//打印
 void Print_arr(int *arr,int N){
 
     int i;
@@ -49,21 +50,35 @@ void Print_arr(int *arr,int N){
     printf("\n");
 }
 
+int max(int a, int b){
+    return a > b ? a : b;
+}
+
+int min(int a, int b){
+    return a < b ? a : b;
+}
+
+//代码超时,需要对排序进行优化
 void Sort_Array(int *op,int* arr,int N,int M){
     int p,q,j;
     for(j = 0; j< 2*M;j = j + 2){
         p = op[j];
         q = op[j+1];
-        if(p == 1){
-            A_order(arr,q,N);
-            //Print_arr(arr,N);
-        }
         if(p == 0){
-            D_order(arr,q);
-            //Print_arr(arr,N);
+            if( p == op[j+2]){
+                D_order(arr,max(q,op[j+3]));
+                j = j + 2;
+            }
+            else D_order(arr,q);
+            Print_arr(arr,N);
         }
-        if( p!=0 && p!=1){
-            printf("出错,请输入正确的操作数");
+        else if(p == 1){
+            if( p == op[j+2]){
+                A_order(arr,min(q,op[j+3]),N);
+                j = j + 2;
+            }
+            else A_order(arr,q,N);
+            Print_arr(arr,N);
         }
     }
     Print_arr(arr,N);
@@ -71,6 +86,7 @@ void Sort_Array(int *op,int* arr,int N,int M){
 
 
 int main(){
+
     int N,M,i;
     //printf("请输入创建序列的长度跟操作次数:\n");
     scanf("%d %d",&N,&M);
