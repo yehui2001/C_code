@@ -95,7 +95,10 @@
         "unordered_set": "cpp",
         "valarray": "cpp",
         "variant": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "__verbose_abort": "cpp",
+        "shared_mutex": "cpp",
+        "thread": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled",
     "files.exclude": {
