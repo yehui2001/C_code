@@ -18,11 +18,12 @@ bool Init_List(LinkList &L){
     if(L==NULL)
         return false;                       //申请内存失败
     L->next = NULL;                         //此时头节点也作为尾结点应该指向空指针
-    return true;
+    printf("初始化函数中L的地址:%p\n",&L);     //加取地址符是返回L指针的地址
+    return true;                            //不加地址符是返回L地址所指对象的地址
 }
 
 //按序查找结点
-LNode *Get_Elem_Address(LinkList L,int i){
+LNode *Get_Elem_Address(LinkList &L,int i){
     if(i<0)
         return NULL;                        //查找位置不合法，此处认为可以查找第0个结点
     LNode *p;                               //指针p为当前扫描到的结点
@@ -36,7 +37,7 @@ LNode *Get_Elem_Address(LinkList L,int i){
 }
 
 //在i个位置插入结点
-bool Insert_Node(LinkList L,int i,ElemType e){
+bool Insert_Node(LinkList &L,int i,ElemType e){
     LNode *p = Get_Elem_Address(L,i-1);     //查找插入位置（i）的前驱结点
     if(p==NULL)
         return false;
@@ -48,7 +49,7 @@ bool Insert_Node(LinkList L,int i,ElemType e){
 }
 
 //尾插法建立单链表
-LinkList Create_List_tail(LinkList L){
+LinkList Create_List_tail(LinkList &L){
     int x;
     LNode *s,*r = L;                        //r为表尾指针
     printf("请输入想要添加的数据:");
@@ -65,7 +66,7 @@ LinkList Create_List_tail(LinkList L){
 }
 
 //头插法建立单链表
-LinkList Create_List_head(LinkList L){
+LinkList Create_List_head(LinkList &L){
     int x;
     LNode *s;
     printf("请输入想要添加的数据:");
@@ -80,8 +81,8 @@ LinkList Create_List_head(LinkList L){
     return L;
 }
 //打印单链表
-void Print_Linklist(LinkList L){
-    LNode *p = L->next;                            //从头指针后的第一个结点开始打印
+void Print_Linklist(LinkList &L){
+    LNode *p = L->next;                      //从头指针后的第一个结点开始打印
     printf("\n链表序列为:\n");
     while(p!=NULL){
         printf("%d\t",p->data);
@@ -89,18 +90,18 @@ void Print_Linklist(LinkList L){
     }
 }
 //删除结点（直接删除第i个结点）
-bool Delete_Linklist_1(LinkList L,int i){
+bool Delete_Linklist_1(LinkList &L,int i){
     LNode *p,*q;
-    p = Get_Elem_Address(L,i-1);
+    p = Get_Elem_Address(L,i-1);                //找到被删结点的前驱结点
     if(p==NULL)
         return false;
-    q = p->next;
+    q = p->next;                                //q指向被删除结点
     p->next = q ->next;
     free(q);
     return true;
 }
 //删除结点（通过删除该结点的后继i+1结点来达到目的）
-bool Delete_Linklist_2(LinkList L,int i){
+bool Delete_Linklist_2(LinkList &L,int i){
     LNode *p,*q;
     p = Get_Elem_Address(L,i);
     if(p==NULL)
@@ -111,16 +112,28 @@ bool Delete_Linklist_2(LinkList L,int i){
     free(q);
     return true;
 }
+// 获取单链表长度 不计入头节点
+int Length_Linklist(LinkList &L) {
+    int len = 0;
+    LNode *p = L->next;
+    while (p != NULL) {
+        p = p->next;
+        len++;
+    }
+    return len;
+}
 
 int main(){
     LinkList L;
     Init_List(L);
+    printf("主函数中的L地址 = %p\n",&L);
     Create_List_tail(L);
     Print_Linklist(L);
     Insert_Node(L,1,99);
     Insert_Node(L,2,999);
     Print_Linklist(L);
-    Delete_Linklist(L,2);
+    Delete_Linklist_1(L,2);
     Print_Linklist(L);
+    printf("\n表长为%d\n",Length_Linklist(L));
     return 0;
 }
