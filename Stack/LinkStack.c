@@ -22,14 +22,16 @@ bool Push_Stack(LinkStack &S,int x){
     s->data = x;
     s->next = S;                   //让新结点成为首结点
     S = s;                         //令新插入的结点始终是头节点
+    return true;
 }
 
 //出栈
-bool Pop_Stack(LinkStack &S){
+bool Pop_Stack(LinkStack &S,int &elem){
     if(S==NULL){
        return false; 
     }
     SNode *p,*q;
+    elem = S->data;
     p = S;
     q = S->next;
     S = q;
@@ -54,6 +56,10 @@ LinkStack Create_Stack_head(LinkStack &S){
     return S;
 }
 
+//判断栈空
+bool isEmpty(LinkStack &S){
+    return (S==NULL);
+}
 
 //打印链栈
 void Print_Stack(LinkStack &S){
@@ -67,11 +73,16 @@ void Print_Stack(LinkStack &S){
 
 int main(){
     LinkStack S;
+    int elem = 0;
     Init_Stack(S);
+    printf("%d\n",isEmpty(S));
     Create_Stack_head(S);
     Print_Stack(S);
     Push_Stack(S,999);
     Print_Stack(S);
-    Pop_Stack(S);
+    Pop_Stack(S,elem);
+    printf("出栈元素为%d",elem);
+    //Pop_Stack(S);  
     Print_Stack(S);
+    printf("\n%d\n",isEmpty(S));
 }
