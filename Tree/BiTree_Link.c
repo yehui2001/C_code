@@ -111,9 +111,9 @@ void LevelOrder(BiTree T){
 //递归建树  以先序遍历序列为例
 void Create_tree(BiTree &T){
     char c;
-    scanf("%c",&c);
-    if(c =='#')
-        T = NULL;
+    scanf("%c",&c);                 //输入的c序列和对应Create函数递归顺序应该与对应遍历序列一致
+    if(c =='#')                    
+        T = NULL;                   
     else{
         T = (BiTNode*)malloc(sizeof(BiTNode));
         T->data = c;
