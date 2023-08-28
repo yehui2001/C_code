@@ -7,7 +7,7 @@ int main(){
     int *p;
     *p = x;
     printf("主函数中的x值 = %d\n",*p);
-    printf("p 的地址：%p",&p);
+    printf("p 的地址：%p\n",&p);
     test(p);
     printf("经过自定义函数中的x值 = %d\n",*p);
     return 0;

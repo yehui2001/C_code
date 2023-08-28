@@ -27,7 +27,7 @@ void visit(ThreadNode *q){
 //中序线索二叉树的构造
 void InThread(ThreadTree T){
     if(T!=NULL){                    //递归，线索化二叉树
-        InThread(T->lchild);    //中序遍历左子树      
+        InThread(T->lchild);        //中序遍历左子树      
         visit(T);                   //访问根结点
         InThread(T->rchild);        //中序遍历右子树
     }
