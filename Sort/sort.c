@@ -8,6 +8,12 @@ void Swap(int &a,int &b){
     a = b;
     b = temp;
 }
+void Swap_Heap(int &a,int &b){
+    int temp = a;
+    printf("%d\t",a);
+    a = b;
+    b = temp;
+}
 
 void Print(int A[]){
     for(int i = 0;i < maxsize;i++){
@@ -129,13 +135,72 @@ void BubbleSort_front(int A[],int n){
     }   
 }
 
-//快速插入排序
-void QuickSort(){
+//排序一趟，返回序列中首个元素的位置
+int Partition(int A[],int low,int high){
+    int pivot = A[low];                         //选择当前表中第一个元素作为枢轴(待排元素)，对表进行划分
+    while(low<high){
+        while(low<high&&A[high]<=pivot)         //必须加上low<high，否则high指针(用来寻找high左侧,low右侧小于枢轴元素值的元素)会找到low的左侧(小于枢轴元素的区域)
+            --high;
+        A[low] = A[high];
+        while(low<high&&A[low]>=pivot)
+            ++low;
+        A[high] = A[low];
+    }
+    A[low] = pivot;
+    return low;
+}
 
+//快速插入排序
+void QuickSort(int A[],int low,int high){
+    if(low<high){
+        int pivotpos = Partition(A,low,high);
+        QuickSort(A,low,pivotpos-1);
+        QuickSort(A,pivotpos+1,high);
+    }
+}
+
+void SelectSort(int A[],int n){
+    for(int i = 0; i < n; i++){             //共进行n-1趟排序
+        int min = i;                        //记录最i小元素位置
+        for(int j = i+1; j < n; j++){       //从A[i,n-1]中找未排序最小元素
+            if(A[j] < A[min])
+                min = j;                    //更新最小元素位置
+        }
+        if(i!=min)                          //该初始元素不是最小元素，则换位置
+            Swap(A[i],A[min]);
+    }
+}
+
+//堆排序，为保证下标观察的舒适性，我们定义A[0]用以存放子树根结点
+void Headjust(int A[],int k,int n){
+    A[0] = A[k];
+    for(int i = 2*k; i <= n; i *=2){
+        if(i < n && A[i] > A[i+1]) i++;   //找到最大孩子位置;
+        if(A[0] <= A[i])    break;          //若根结点大于最大孩子，则无需调整
+        else{
+            A[k] = A[i];                    //该子树根结点位置赋值成最大孩子值
+            k = i;                          //更新k值，向下找A[0]的真正位置->i = 2*k ...
+        }
+    }
+    A[k] = A[0];                            //k为最终位置
+}
+
+void BuildMinHeap(int A[],int n){
+    for(int i = n/2; i >= 1; i--){
+        Headjust(A,i,n);
+    }
+}
+
+void HeadSort(int A[],int n){
+    BuildMinHeap(A,n);
+    for(int i = n; i>=1; i--){
+        Swap_Heap(A[1],A[i]);               //输出堆顶元素(和堆底元素互换)
+        Headjust(A,1,i-1);                  //调整剩余元素   
+    }
 }
 
 int main(){
-    int num[maxsize] = {9,8,7,8,6,5,4,3,2,1};
+    int num[maxsize] = {53,17,78,9,45,65,87,32,77,94};
     int lens = sizeof(num)/sizeof(int);
     //输入序列
     printf("请输入序列:");
@@ -154,7 +219,15 @@ int main(){
     //printf("折半插入排序:\n");
     //ShellSort(num,lens);
     //printf("希尔排序:\n");
-    BubbleSort_front(num,lens);
+    //BubbleSort_front(num,lens);
+    //Print(num);
+    //QuickSort(num,0,lens);
+    //SelectSort(num,lens);
+    int B[lens+1];
+    for(int l = 1;l < lens+1; l++){
+        B[l] = num[l-1]; 
+    }
+    HeadSort(B,lens);
     //Print(num);
     return 0;
 }
