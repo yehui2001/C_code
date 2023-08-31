@@ -45,7 +45,7 @@ bool Insert_List(Seqlist &L,int i,Elemtype e){ //i means the position inserted,e
 
 // 删除数据元素
 bool Delete_List(Seqlist &L,int i,Elemtype &e){ //i 为要删除元素的位序,e来返回删除元素的值
-    if(i<1||i>L.length+1)   //判断插入位置是否合法
+    if(i<1||i>L.length+1)   //判断删除位置是否合法
         return false;
     e = L.data[i-1];
     for(int j=i; j<L.length; j++){ //若要删除最后一个元素，只是将表长减1，最后一个元素其实没有被覆盖掉

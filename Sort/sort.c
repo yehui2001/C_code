@@ -192,10 +192,14 @@ void BuildMinHeap(int A[],int n){
 }
 
 void HeadSort(int A[],int n){
-    BuildMinHeap(A,n);
+    int B[n+1];
+    for(int l = 1;l < n+1; l++){
+        B[l] = A[l-1]; 
+    }
+    BuildMinHeap(B,n);
     for(int i = n; i>=1; i--){
-        Swap_Heap(A[1],A[i]);               //输出堆顶元素(和堆底元素互换)
-        Headjust(A,1,i-1);                  //调整剩余元素   
+        Swap_Heap(B[1],B[i]);               //输出堆顶元素(和堆底元素互换)
+        Headjust(B,1,i-1);                  //调整剩余元素   
     }
 }
 
@@ -223,11 +227,7 @@ int main(){
     //Print(num);
     //QuickSort(num,0,lens);
     //SelectSort(num,lens);
-    int B[lens+1];
-    for(int l = 1;l < lens+1; l++){
-        B[l] = num[l-1]; 
-    }
-    HeadSort(B,lens);
+    HeadSort(num,lens);
     //Print(num);
     return 0;
 }
