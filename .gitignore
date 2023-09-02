@@ -1,9 +1,10 @@
-# Ignore all
+# Ignore all 忽略所有文件
 *
- 
-# Unignore all with extensions
-!*.*
- 
+
+# Unignore files with specific extensions 设置你不想忽略的文件
+!*.cpp
+!*.txt
+!*.md
+!.c
 # Unignore all dirs
 !*/
- 
