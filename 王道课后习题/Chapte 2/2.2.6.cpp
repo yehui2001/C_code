@@ -25,17 +25,22 @@ void Print_List(Seqlist &L){
     cout << endl;
 }
 
-void Delete(Seqlist &L,Elemtype s,Elemtype t){
-    if(s >= t || L.length==0)
+/*
+算法思想:
+    类似于直接插入思想，将第一个元素视为有序表，然后判断后面插入的元素是否与前面序列的最后一个元素相同
+若相同，则向后查找
+
+*/
+void Delete_SameElem(Seqlist &L){
+    if(L.length == 0)
         return;
-    int k = 0;                              
-    for(int i = 0; i < L.length; i++){      //删除x元素相当于,把每个非x元素向前移动的步数 = 其前面总共的x元素的个数
-        if(L.data[i] >= s&&L.data[i] <= t)
-            k++;
-        else
-            L.data[i-k] = L.data[i];
+    int i = 0;
+    for(int j = 1; j < L.length; j++){
+        if(L.data[j] != L.data[i]){
+            L.data[++i] = L.data[j];
+        }
     }
-    L.length -= k;
+    L.length  = i+1;
 }
 
 int main(){
@@ -47,6 +52,6 @@ int main(){
         cin >> L.data[i];
     }
     Print_List(L);
-    Delete(L,2,8);
+    Delete_SameElem(L);
     Print_List(L);
 }

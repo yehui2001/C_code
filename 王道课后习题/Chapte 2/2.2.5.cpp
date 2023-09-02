@@ -25,7 +25,7 @@ void Print_List(Seqlist &L){
     cout << endl;
 }
 
-void Delete(Seqlist &L,Elemtype s,Elemtype t){
+void Delete_scope(Seqlist &L,Elemtype s,Elemtype t){
     if(s >= t || L.length==0)
         return;
     int k = 0;                              
@@ -47,6 +47,6 @@ int main(){
         cin >> L.data[i];
     }
     Print_List(L);
-    Delete(L,2,8);
+    Delete_scope(L,2,8);
     Print_List(L);
 }
