@@ -1,13 +1,10 @@
-# Ignore all 忽略所有文件
+# Ignore all
 *
-
-# Unignore files with specific extensions 设置你不想忽略的文件
-!*.c
-!*.cpp
-!*.py
-!*.ipynb
-!*.txt
-!*.md
-!*.pdf
+ 
+# Unignore all with extensions
+!*.*
+ 
 # Unignore all dirs
 !*/
+ 
+### Above combination will ignore all files without extension ###
