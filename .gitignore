@@ -1,0 +1,15 @@
+# Ignore all 忽略所有文件
+*
+
+# Unignore files with specific extensions 设置你不想忽略的文件
+!*.c
+!*.cpp
+!*.py
+!*.ipynb
+!*.txt
+!*.md
+!*.pdf
+!*.gitignore
+!*.vscode
+# Unignore all dirs
+!*/
