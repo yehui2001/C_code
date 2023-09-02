@@ -1,57 +1,13 @@
-# Prerequisites
-*.d
+# Ignore all 忽略所有文件
+*
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
-
-# Linker output
-*.ilk
-*.map
-*.exp
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.exec
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-*.DS_Store
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
-
-# Ignore all
-*.
+# Unignore files with specific extensions 设置你不想忽略的文件
+!*.c
+!*.cpp
+!*.py
+!*.ipynb
+!*.txt
+!*.md
+!*.pdf
+# Unignore all dirs
+!*/
