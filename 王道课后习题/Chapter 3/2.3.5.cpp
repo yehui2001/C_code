@@ -37,8 +37,10 @@ LinkList Create_List_tail(LinkList &L){
     return L;
 }
 
-void Sort_Link(LinkList &L){
-    LNode *p = L->next,*r = L;
+//逆置单链表
+//方法1采用头插法
+void reverse(LinkList &L){
+    LNode *p = L->next,*r;
     
 }
 

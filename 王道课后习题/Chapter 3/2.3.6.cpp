@@ -42,13 +42,13 @@ void Sort_Link(LinkList &L){
     LNode *r = p->next;
     p->next = NULL;                          //创造只含有一个元素的有序表，和含有n-1个元素的无序表
     p = r;
-    while(p!=NULL);{
+    while(p!=NULL){
         r = p->next;
         pre = L;                             //pre每次从已排序列的头结点开始
         while(pre->next!=NULL && p->data > pre->next->data)//向后查找，找到p的位置
             pre = pre->next;
         p->next = pre->next;
-        pre->>next = p;
+        pre->next = p;
         p = r;                               //每插入一个元素，待排序列的指针向后移动
     }
 }
@@ -70,7 +70,7 @@ int main(){
     Init_List(L);
     Create_List_tail(L);
     Print_Linklist(L);
-    Delete_Min(L);
+    Sort_Link(L);
     Print_Linklist(L);
     return 0;
 }
