@@ -29,7 +29,7 @@ void Find_midpos(Seqlist &L){
     int step = 0,pos = 0;
     for (int i = 0,j = L.length/2; i < L.length/2 && j < L.length;){
         if(L.data[i] < L.data[j]){
-            step++;                     //
+            step++;                     //记录按递增序列读取元素所读取的次数
             if(step==L.length/2){
                 pos = i;
                 break;
