@@ -37,20 +37,23 @@ LinkList Create_List_tail(LinkList &L){
     return L;
 }
 
-void Sort_Link(LinkList &L){
-    LNode *p = L->next,*pre;                 //
-    LNode *r = p->next;
-    p->next = NULL;                          //创造只含有一个元素的有序表，和含有n-1个元素的无序表
-    p = r;
-    while(p!=NULL){
-        r = p->next;
-        pre = L;                             //pre每次从已排序列的头结点开始
-        while(pre->next!=NULL && p->data > pre->next->data)//向后查找，找到p的位置
-            pre = pre->next;
-        p->next = pre->next;
-        pre->next = p;
-        p = r;                               //每插入一个元素，待排序列的指针向后移动
+void Delete_Seq(LinkList &L){
+    while(L->next!=NULL){
+        LNode *pre = L,*q = pre->next;
+        int min = q->data;
+        while(q->next!=NULL){
+            if(q->next->data < min){
+                min = q->next->data;
+                pre = q;                   //用来记录被删元素的前驱结点
+            }
+            q = q->next;
+        }
+        LNode *r = pre->next;               //指向被删除元素
+        cout<<"\t"<< pre->next->data;
+        pre->next = r->next;
+        delete r;
     }
+    delete L;
 }
 
 //打印单链表
@@ -70,7 +73,6 @@ int main(){
     Init_List(L);
     Create_List_tail(L);
     Print_Linklist(L);
-    Sort_Link(L);
-    Print_Linklist(L);
+    Delete_Seq(L);
     return 0;
 }
