@@ -37,21 +37,18 @@ LinkList Create_List_tail(LinkList &L){
     return L;
 }
 
-void Sort_Link(LinkList &L){
-    LNode *p = L->next,*pre;                 //头结点单独处理
-    LNode *r = p->next;
-    p->next = NULL;                         //将原表拆成头结点跟n-1个结点，头结点默认为有序表
-    p = r;                                  //记录无序表
-    while(p!=NULL){                         //将无序表中的元素按直接插入的方法，插入到有序表中
-        r = p->next;
-        pre = L;
-        while(pre->next!=NULL && p->data > pre->next->data)//每次从有序表的头结点开始向后查找
-            pre = pre->next;
-        p->next = pre->next;                //若p的值比pre后一个结点的值小，则将p结点插到pre后面
-        pre->next = p;                      
-        p = r;                              //继续找无序表中的下一个元素插入到有序表中
+void Split_Link(LinkList &L,LinkList &L2){
+    LNode *p = L->next,*r = L2;         //p为奇结点指针，r为L2队尾指针
+    while(p->next!=NULL){               //若p为空结点，p->next就没有，此处会报错
+        r->next = p->next;              //p->next结点插入偶数序列中
+        p->next = p->next->next;        //移除p->next结点
+        r = r->next;                    //偶数序列的表尾指针后移
+        r->next = NULL;                 //每次把偶数结点插入到L2后，表尾指向NULL
+        p = p->next;                    //指向奇结点指针后移
+        if(p==NULL){                    //若p结点已空，跳出循环
+            break;
+        }
     }
-    
 }
 
 //打印单链表
@@ -67,11 +64,13 @@ void Print_Linklist(LinkList &L){
 
 
 int main(){
-    LinkList L;
+    LinkList L,L2;
     Init_List(L);
+    Init_List(L2);
     Create_List_tail(L);
     Print_Linklist(L);
-    Sort_Link(L);
+    Split_Link(L,L2);
     Print_Linklist(L);
+    Print_Linklist(L2);
     return 0;
 }
