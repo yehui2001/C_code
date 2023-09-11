@@ -29,28 +29,31 @@ LinkList Create_List_tail(LinkList &L){
     while(x!=9999){
         s = (LNode*)malloc(sizeof(LNode));
         s->data = x;
-        r->next = s;                        //在表尾插入新结点
-        r = s;                              //令表尾指针始终指向表尾
+        r->next = s;                         //在表尾插入新结点
+        r = s;                               //令表尾指针始终指向表尾
         cin >> x;                      
     }
-    r->next = NULL;                         //尾结点置空
+    r->next = NULL;                          //尾结点置空
     return L;
 }
 
-void Delete_Scope(LinkList &L,ElemType a,ElemType b){
-    LNode *p = L->next,*pre = L;
-    while(p!=NULL){
-        if(p->data > a && p->data < b){     //找到则删除结点
-            LNode *q = p;
-            pre->next = p->next;
-            p = p->next;
-            delete q;
+void Delete_Seq(LinkList &L){
+    while(L->next!=NULL){
+        LNode *pre = L,*q = pre->next;
+        int min = q->data;
+        while(q->next!=NULL){
+            if(q->next->data < min){
+                min = q->next->data;
+                pre = q;                   //用来记录被删元素的前驱结点
+            }
+            q = q->next;
         }
-        else{                               //未找到则向后查找
-            p = p->next;
-            pre = pre->next;
-        }
+        LNode *r = pre->next;               //指向被删除元素
+        cout<<"\t"<< pre->next->data;
+        pre->next = r->next;
+        delete r;
     }
+    delete L;
 }
 
 //打印单链表
@@ -70,7 +73,6 @@ int main(){
     Init_List(L);
     Create_List_tail(L);
     Print_Linklist(L);
-    Delete_Scope(L,4,6);
-    Print_Linklist(L);
+    Delete_Seq(L);
     return 0;
 }

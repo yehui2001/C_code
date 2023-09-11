@@ -29,31 +29,28 @@ LinkList Create_List_tail(LinkList &L){
     while(x!=9999){
         s = (LNode*)malloc(sizeof(LNode));
         s->data = x;
-        r->next = s;                        //在表尾插入新结点
-        r = s;                              //令表尾指针始终指向表尾
+        r->next = s;                         //在表尾插入新结点
+        r = s;                               //令表尾指针始终指向表尾
         cin >> x;                      
     }
-    r->next = NULL;                         //尾结点置空
+    r->next = NULL;                          //尾结点置空
     return L;
 }
 
-void Sort_Link(LinkList &L){
-    LNode *p = L->next,*pre;                 //头结点单独处理
-    LNode *r = p->next;
-    p->next = NULL;                         //将原表拆成头结点跟n-1个结点，头结点默认为有序表
-    p = r;                                  //记录无序表
-    while(p!=NULL){                         //将无序表中的元素按直接插入的方法，插入到有序表中
-        r = p->next;
-        pre = L;
-        while(pre->next!=NULL && p->data > pre->next->data)//每次从有序表的头结点开始向后查找
-            pre = pre->next;
-        p->next = pre->next;                //若p的值比pre后一个结点的值小，则将p结点插到pre后面
-        pre->next = p;                      
-        p = r;                              //继续找无序表中的下一个元素插入到有序表中
+//与上题大差不差，区别在于对B表的建立采用头插法
+void Split_twoside(LinkList &L,LinkList &L2){
+    LNode *p = L->next,*q;              //p为A的结点      
+    while(p->next!=NULL){               //若p为空结点，p->next就没有，此处会报错
+        q = p->next->next;
+        p->next->next = L2->next;       //p->next结点头插入偶数序列中
+        L2->next = p->next;
+        p->next = q;                
+        p = p->next;                    //p后移
+        if(p==NULL){                    //若p结点已空，跳出循环
+            break;
+        }
     }
-    
 }
-
 //打印单链表
 void Print_Linklist(LinkList &L){
     LNode *p = L->next;                      //从头指针后的第一个结点开始打印
@@ -68,10 +65,12 @@ void Print_Linklist(LinkList &L){
 
 int main(){
     LinkList L;
+    LinkList L2;
     Init_List(L);
+    Init_List(L2);
     Create_List_tail(L);
     Print_Linklist(L);
-    Sort_Link(L);
-    Print_Linklist(L);
+    Split_twoside(L,L2);
+    Print_Linklist(L2);
     return 0;
 }
