@@ -37,20 +37,36 @@ LinkList Create_List_tail(LinkList &L){
     return L;
 }
 
-void Delete_Scope(LinkList &L,ElemType a,ElemType b){
-    LNode *p = L->next,*pre = L;
-    while(p!=NULL){
-        if(p->data > a && p->data < b){     //找到则删除结点
-            LNode *q = p;
-            pre->next = p->next;
-            p = p->next;
-            delete q;
-        }
-        else{                               //未找到则向后查找
-            p = p->next;
-            pre = pre->next;
-        }
+// 获取单链表长度 不计入头节点
+int Length_Linklist(LinkList &L) {
+    int len = 0;
+    LNode *p = L->next;
+    while (p != NULL) {
+        p = p->next;
+        len++;
     }
+    return len;
+}
+
+void Find_Same(LinkList &L1,LinkList &L2,LinkList &L){
+    LNode *p = L1->next,*q = L2->next,*s = L;               //传入的s表默认初始化
+    while(p&&q){
+        if(p->data==q->data){                               //若值相同
+            LNode *r;
+            r = new LNode;                                  //创建新结点，并赋值
+            r->data = p->data;                               
+            s->next = r;                                    //将其链接到L表的末尾
+            s = r;                                          //s是指向L的队尾指针
+            p = p->next;
+            q = q->next;
+        }
+        else if(p->data < q->data){
+            p = p->next;                                    //若p值更小，向后查找等于的q值的p
+        }
+        else                                                //若q值更小，向后查找等于的p值的q
+            q = q->next;
+    }
+    s->next = NULL;                 //若L表未初始化需要添加表尾指针指向NULL
 }
 
 //打印单链表
@@ -66,11 +82,16 @@ void Print_Linklist(LinkList &L){
 
 
 int main(){
-    LinkList L1;
-    Init_List(L);
-    Create_List_tail(L);
-    Print_Linklist(L);
-    Delete_Scope(L,4,6);
+    LinkList L1,L2,L;
+    Init_List(L1);
+    Init_List(L2);
+    Create_List_tail(L1);
+    Create_List_tail(L2);
+    cout << "序列1:";
+    Print_Linklist(L1);
+    cout << "序列2:";
+    Print_Linklist(L2);
+    Find_Same(L1,L2,L);
     Print_Linklist(L);
     return 0;
 }

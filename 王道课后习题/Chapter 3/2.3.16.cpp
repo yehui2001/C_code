@@ -37,22 +37,37 @@ LinkList Create_List_tail(LinkList &L){
     return L;
 }
 
-void Delete_Scope(LinkList &L,ElemType a,ElemType b){
-    LNode *p = L->next,*pre = L;
-    while(p!=NULL){
-        if(p->data > a && p->data < b){     //找到则删除结点
-            LNode *q = p;
-            pre->next = p->next;
-            p = p->next;
-            delete q;
-        }
-        else{                               //未找到则向后查找
-            p = p->next;
-            pre = pre->next;
-        }
+// 获取单链表长度 不计入头节点
+int Length(LinkList &L) {
+    int len = 0;
+    LNode *p = L->next;
+    while (p != NULL) {
+        p = p->next;
+        len++;
     }
+    return len;
 }
 
+//两次匹配：第一次匹配是从A链中找结点匹配B的首值，第二次两个指针同时向后匹配
+//用pre记录每次第一次匹配的A中结点，p指针向后查找失败后，从pre->next重新开始匹配
+void Pattern(LinkList &L1,LinkList &L2){
+    LNode *p = L1->next,*q = L2->next;
+    LNode *pre = p;
+    while(p&&q)
+        if(p->data==q->data){
+            p = p->next;
+            q = q->next;
+        }
+        else{
+            pre = pre->next;            //记录每趟A链中开始比较的结点值，因为上一次
+            p = pre;
+            q = L2->next;
+        }
+    if(q==NULL)
+        cout <<"匹配成功"<<endl;
+    else
+        cout <<"匹配不成功"<<endl;
+}
 //打印单链表
 void Print_Linklist(LinkList &L){
     LNode *p = L->next;                      //从头指针后的第一个结点开始打印
@@ -66,11 +81,15 @@ void Print_Linklist(LinkList &L){
 
 
 int main(){
-    LinkList L1;
-    Init_List(L);
-    Create_List_tail(L);
-    Print_Linklist(L);
-    Delete_Scope(L,4,6);
-    Print_Linklist(L);
+    LinkList L1,L2;
+    Init_List(L1);
+    Init_List(L2);
+    Create_List_tail(L1);
+    Create_List_tail(L2);
+    cout << "序列1:";
+    Print_Linklist(L1);
+    cout << "序列2:";
+    Print_Linklist(L2);
+    Pattern(L1,L2);
     return 0;
 }
