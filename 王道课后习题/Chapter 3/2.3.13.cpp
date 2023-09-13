@@ -37,20 +37,42 @@ LinkList Create_List_tail(LinkList &L){
     return L;
 }
 
-void Delete_Scope(LinkList &L,ElemType a,ElemType b){
-    LNode *p = L->next,*pre = L;
-    while(p!=NULL){
-        if(p->data > a && p->data < b){     //找到则删除结点
-            LNode *q = p;
-            pre->next = p->next;
-            p = p->next;
-            delete q;
-        }
-        else{                               //未找到则向后查找
-            p = p->next;
-            pre = pre->next;
-        }
+// 获取单链表长度 不计入头节点
+int Length_Linklist(LinkList &L) {
+    int len = 0;
+    LNode *p = L->next;
+    while (p != NULL) {
+        p = p->next;
+        len++;
     }
+    return len;
+}
+
+void Merge_List(LinkList &L1,LinkList &L2){
+    LNode *p = L1->next,*q = L2->next,*r;
+    while(p&&q){
+        if(p->data <= q->data){
+            r = p->next;
+            p->next = L1->next;
+            L1->next = p;
+            p = r;
+        }
+        else{
+            r = q->next;
+            q->next = L1->next;
+            L1->next = q;
+            q = r;
+        }
+    }                       //处理剩余结点
+    if(p)                   //若p空了，则处理q那条链
+        q = p;              //若p不空，则令q = p，处理p这条链
+    while(q){
+        r = q->next;
+        q->next = L1->next;
+        L1->next = q;
+        q = r;
+    }
+    delete L2;
 }
 
 //打印单链表
@@ -66,11 +88,16 @@ void Print_Linklist(LinkList &L){
 
 
 int main(){
-    LinkList L1;
-    Init_List(L);
-    Create_List_tail(L);
-    Print_Linklist(L);
-    Delete_Scope(L,4,6);
-    Print_Linklist(L);
+    LinkList L1,L2;
+    Init_List(L1);
+    Init_List(L2);
+    Create_List_tail(L1);
+    Create_List_tail(L2);
+    cout << "序列1:";
+    Print_Linklist(L1);
+    cout << "序列2:";
+    Print_Linklist(L2);
+    Merge_List(L1,L2);
+    Print_Linklist(L1);
     return 0;
 }
