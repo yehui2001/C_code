@@ -37,10 +37,10 @@ LinkList Create_List_tail(LinkList &L){
     return L;
 }
 
-void Sort_Link(LinkList &L){
-    LNode *p = L->next,*pre;                 //头结点单独处理
+void Sort_Link(LinkList &L){                //此处的首结点是头结点之后的结点
+    LNode *p = L->next,*pre;                //首结点单独处理
     LNode *r = p->next;
-    p->next = NULL;                         //将原表拆成头结点跟n-1个结点，头结点默认为有序表
+    p->next = NULL;                         //将原表拆成首结点跟n-1个结点，头结点默认为有序表
     p = r;                                  //记录无序表
     while(p!=NULL){                         //将无序表中的元素按直接插入的方法，插入到有序表中
         r = p->next;
