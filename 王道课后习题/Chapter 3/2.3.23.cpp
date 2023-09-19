@@ -2,7 +2,7 @@
 #include<iostream>
 using namespace std;
 
-typedef int ElemType;
+typedef char ElemType;
 // 定义单链表中的结点类型
 typedef struct LNode{
     ElemType data;          //数据域
@@ -11,7 +11,7 @@ typedef struct LNode{
 
 //初始化单链表
 bool Init_List(LinkList &L){
-    L = (LNode *)malloc(sizeof(LNode));     //申请一个头节点
+    L = new LNode;     //申请一个头节点
     if(L==NULL)
         return false;                       //申请内存失败
     L->next = NULL;                         //此时头节点也作为尾结点应该指向空指针
@@ -21,16 +21,16 @@ bool Init_List(LinkList &L){
 
 //尾插法建立单链表
 LinkList Create_List_tail(LinkList &L){
-    int x;
+    char x;
     LNode *s,*r = L;                        //r为表尾指针
-    cout << "请输入想要添加的数据:" <<endl;
+    cout << "请输入想要添加的数据(输入'/'停止):" <<endl;
     cin >> x;
-    while(x!=9999){
-        s = (LNode*)malloc(sizeof(LNode));
+    while(x!='/'){                          //输入/停止
+        s = new LNode;
         s->data = x;
         r->next = s;                        //在表尾插入新结点
         r = s;                              //令表尾指针始终指向表尾
-        cin >> x;                     //若cin >> “%d”里面有其他内容，输入时需要一并键入
+        cin >> x;                    
     }
     r->next = NULL;                         //尾结点置空
     return L;
@@ -48,13 +48,65 @@ void Print_Linklist(LinkList &L){
     cout << endl;
 }
 
+// 获取单链表长度 不计入头节点
+int Length_Linklist(LinkList &L) {
+    int len = 0;
+    LNode *p = L->next;
+    while (p != NULL) {
+        p = p->next;
+        len++;
+    }
+    return len;
+}
+
+//要求时间高效，采取空间换时间
+//基于L1，L2创建两个新的链表，采用头插法。
+//从头开始查找第一个值不相同的结点。
+void Find_Common_suffix(LinkList L1,LinkList L2){
+    LNode *p1 = L1->next,*p2 = L2->next;
+    LNode *str1 = new LNode,*s,*str2 = new LNode;
+    str1->next = NULL;
+    str2->next = NULL;
+    while(p1!=NULL){
+        s = p1->next;
+        p1->next = str1->next;
+        str1->next = p1;
+        p1 = s;
+    }
+    L1 = str1;
+    while(p2!=NULL){
+        s = p2->next;
+        p2->next = str2->next;
+        str2->next = p2;
+        p2 = s;
+    }
+    L2 = str2;
+    int Tag = 0;
+    str1 = str1->next;
+    str2 = str2->next;
+    while(str1!=NULL||str2!=NULL){
+        if(str1->data!=str2->data)
+            break;
+        Tag++;
+        str1 = str1->next;
+        str2 = str2->next;
+        if(str2==NULL||str1==NULL)
+            break;
+    }
+    cout <<"公共后缀位置位于倒数第"<< Tag << "位置" << endl;
+}
+
 
 
 int main(){
-    LinkList L;
-    Init_List(L);
-    Create_List_tail(L);
-    Print_Linklist(L);
-    Find_LNode(L,4);
+    LinkList L1,L2;
+    Init_List(L1);
+    Init_List(L2);
+    Create_List_tail(L1);
+    Create_List_tail(L2);
+    Print_Linklist(L1);
+    Print_Linklist(L2);
+    Find_Common_suffix(L1,L2);
+    //Print_Linklist(L1);
     return 0;
 }
