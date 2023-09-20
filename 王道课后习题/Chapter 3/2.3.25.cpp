@@ -49,27 +49,34 @@ void Print_Linklist(LinkList &L){
     cout << endl;
 }
 
-//删除绝对值重复的结点
-//采用辅助空间，记录每个值｜data｜出现的次数，若下一个结点的值已经出现了一次，则删除下一个结点
-void Delete_Same(LinkList &L){
-    LNode *p = L,*r;
-    int *q = new int[n+1];
-    for(int i = 0; i< n+1;i++)
-        *(q+1) = 0;
-    while(p->next!=NULL){
-        int m = abs(p->next->data);
-        if(*(q+m)==0){
-            *(q+m)=1;
-            p = p->next;
-        }
-        else{               //下一个结点已经出现一次
-            r = p->next;
-            p->next = r->next;
-            delete r;
-        }
+void Resort(LinkList &L){
+    LNode *p,*q,*r,*s;
+    p = q = L;
+    while(q->next!=NULL){                   //寻找中间结点
+        p = p->next;                        //p走一步
+        q = q->next;                        
+        if(q->next!=NULL) q = q->next;      //q走两步
     }
-    delete []q;
+    q = p->next;                            //p即为中间结点，令q为后半段的头结点
+    p->next = NULL;                         //此时的p为前半段的尾结点，其next->NULL,且前半段长度>=后半段，最多长1，如 1 2 3 | 5 4 
+    while(q!=NULL){                         //将链表后半段逆置，运用头插法,每次在p结点后面插入新结点
+        r = q->next;                        //防止断链，记录未插入结点
+        q->next = p->next;
+        p->next = q;
+        q = r;                              //此时链的相对位置: 1 2 3.....n n-1.....
+    }
+    s = L->next;                            //依次将后半段中的第一个结点插入到前半段的第一个结点后面
+    q = p->next;
+    p->next = NULL;
+    while(q!=NULL){
+        r = q->next;
+        q->next = s->next;
+        s->next = q;
+        s = q->next;
+        q = r;
+    }
 }
+
 
 
 int main(){
@@ -77,7 +84,7 @@ int main(){
     Init_List(L);
     Create_List_tail(L);
     Print_Linklist(L);
-    Delete_Same(L);
+    Resort(L);
     Print_Linklist(L);
     return 0;
 }
