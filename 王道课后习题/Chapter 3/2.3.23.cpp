@@ -49,7 +49,7 @@ void Print_Linklist(LinkList &L){
 }
 
 // 获取单链表长度 不计入头节点
-int Length_Linklist(LinkList &L) {
+int Length(LinkList &L) {
     int len = 0;
     LNode *p = L->next;
     while (p != NULL) {
@@ -96,6 +96,33 @@ void Find_Common_suffix(LinkList L1,LinkList L2){
     cout <<"公共后缀位置位于倒数第"<< Tag << "位置" << endl;
 }
 
+//王道书答案
+//以尾部对齐，让长链的指针移动到与短链起点相同的位置。
+//一起向后查找公共结点
+LNode *find_addr(LinkList L1,LinkList L2){
+    int m,n;
+    LNode *p,*q;
+    m = Length(L1);
+    n = Length(L2);
+    for(p = L1; m > n; m--)              //若L1长，向后移动m-n+1次（包括一次从头结点到带值首结点）
+        p = p->next;
+    for(q = L2; m < n; n--)
+        q = q->next;    
+    while(p->next!=NULL && p->next!=NULL){
+        p = p->next;
+        q = q->next;
+        if(p->data==q->data)
+            break;
+    }
+    cout <<"公共后缀的第一个值为" << p->data << endl;
+    return p;
+}
+
+
+
+
+
+
 
 
 int main(){
@@ -106,7 +133,8 @@ int main(){
     Create_List_tail(L2);
     Print_Linklist(L1);
     Print_Linklist(L2);
-    Find_Common_suffix(L1,L2);
+    //Find_Common_suffix(L1,L2);
+    find_addr(L1,L2);
     //Print_Linklist(L1);
     return 0;
 }
