@@ -159,6 +159,7 @@ void QuickSort(int A[],int low,int high){
     }
 }
 
+//选择排序
 void SelectSort(int A[],int n){
     for(int i = 0; i < n; i++){             //共进行n-1趟排序
         int min = i;                        //记录最i小元素位置
