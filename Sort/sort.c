@@ -226,9 +226,9 @@ int main(){
     //printf("希尔排序:\n");
     //BubbleSort_front(num,lens);
     //Print(num);
-    //QuickSort(num,0,lens);
+    QuickSort(num,0,lens-1);
     //SelectSort(num,lens);
-    HeadSort(num,lens);
-    //Print(num);
+    //HeadSort(num,lens);
+    Print(num);
     return 0;
 }

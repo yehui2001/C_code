@@ -16,7 +16,6 @@ bool Init_List(LinkList &L){
     if(L==NULL)
         return false;                       //申请内存失败
     L->next = NULL;                         //此时头节点也作为尾结点应该指向空指针
-    //cout << "初始化函数中L的地址:"<<&L<< endl; //加取地址符是返回L指针的地址
     return true;                            //不加地址符是返回L地址所指对象的地址
 }
 
@@ -31,7 +30,7 @@ LinkList Create_List_tail(LinkList &L){
         s->data = x;
         r->next = s;                        //在表尾插入新结点
         r = s;                              //令表尾指针始终指向表尾
-        cin >> x;                     //若cin >> “%d”里面有其他内容，输入时需要一并键入
+        cin >> x;                     
     }
     r->next = NULL;                         //尾结点置空
     return L;
