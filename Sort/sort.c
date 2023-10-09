@@ -138,10 +138,10 @@ void BubbleSort_front(int A[],int n){
 //排序一趟，返回序列中首个元素的位置
 int Partition(int A[],int low,int high){
     int pivot = A[low];                         //选择当前表中第一个元素作为枢轴(待排元素)，对表进行划分
-    while(low<high){
+    while(low<high){                            //low = high是跳出条件，即找到对应位置，无需进入循环
         while(low<high&&A[high]<=pivot)         //必须加上low<high，否则high指针(用来寻找high左侧,low右侧小于枢轴元素值的元素)会找到low的左侧(小于枢轴元素的区域)
-            --high;
-        A[low] = A[high];
+            --high;                             //取等号的原因是防止出现死循环，例如  5_    2   3   6   6   8
+        A[low] = A[high];                       //                                           low high   
         while(low<high&&A[low]>=pivot)
             ++low;
         A[high] = A[low];

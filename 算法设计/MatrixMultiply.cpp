@@ -30,6 +30,7 @@ void MatrixChain(int p[],int n,int m[][maxSize],int s[][maxSize]){          //pç
 			}
     }
 }
+
 void Traceback(int i,int j,int s[][maxSize]){
     if(i == j)  return;
     Traceback(i,s[i][j],s);
