@@ -11,5 +11,5 @@
 !*.pdf
 !*.gitignore
 !*.vscode
-# Unignore all dirs
+# Unignore all dirs  忽略所有空文件夹
 !*/

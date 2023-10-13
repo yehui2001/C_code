@@ -40,13 +40,13 @@ LinkList Create_List_tail(LinkList &L){
     cout << "请输入想要添加的数据:"<< endl;
     cin >> x;
     while(x!=9999){
-        if(L==NULL){                            //由于无头结点的特殊性，创建的第一个结点需要重新赋予头指针
+        if(L==NULL){                            
             s = (LNode*)malloc(sizeof(LNode));
             s->data = x;
             s->next = NULL;
-            L = s;                              //令新创建的结点作为第一个结点
-            r = s;                              //令表尾指针始终指向表尾
-            cin >> x;                     //若scanf“%d”里面有其他内容，输入时需要一并键入
+            L = s;                              
+            r = s;                              
+            cin >> x;                     
         }
         else{
             s = (LNode*)malloc(sizeof(LNode));

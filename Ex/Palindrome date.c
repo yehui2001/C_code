@@ -175,12 +175,12 @@ int main(int argc, char *argv[])
 {
     int date[N];
     int num,year;
-    //printf("请输入形如yyyymmdd形式的日期:");
+    printf("请输入形如yyyymmdd形式的日期:");
     scanf("%d",&num);
     Array_transfrom(num,date);
-    //Judgement_date(date);
-    //Judge_Palindrome(date);
+    printf("下一个回文日期是:");
     find_Palindrome_date(date);
+    printf("下一个ABAB回文日期是:");
     find_ABABBABA_date(date);
     printf("\n");
     return 0;
