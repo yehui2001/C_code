@@ -21,7 +21,7 @@ int Non_Recur(int n,int x){
     SqStack st[maxsize];
     int top = -1,i;                         //结构体数组栈的  栈顶指针
     ElemType fv1 = 1,fv2 = 2*x;             //n = 0, n = 1的函数初值
-    for(i = n; i >= 2; i--){
+    for(i = n; i >= 2; i--){                //注意栈顶元素是P2
         top++;
         st[top].no = i;                     //为每个空间定义函数序号
     }
