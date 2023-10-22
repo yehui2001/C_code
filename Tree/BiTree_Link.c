@@ -52,7 +52,7 @@ bool Out_Queue(LinkQueue &Q,BiTree &q){
         return false;
     q = p->Elem;
     Q.front->next = p->next;     //指向下一个结点
-    if(Q.rear==p)               //若原队列中只有一个元素，删除后队空
+    if(Q.rear==p)                //若原队列中只有一个元素，删除后队空
         Q.rear = Q.front;
     free(p);
     //printf("%c出队\n",x);
@@ -107,6 +107,7 @@ void LevelOrder(BiTree T){
             In_Queue(Q,p->rchild);
     }
 }
+
 
 //递归建树  以先序遍历序列为例
 void Create_tree(BiTree &T){
