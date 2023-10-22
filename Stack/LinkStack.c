@@ -76,13 +76,13 @@ int main(){
     int elem = 0;
     Init_Stack(S);
     printf("%d\n",isEmpty(S));
-    Create_Stack_head(S);
+    //Create_Stack_head(S);
     Print_Stack(S);
     Push_Stack(S,999);
     Print_Stack(S);
     Pop_Stack(S,elem);
-    printf("出栈元素为%d",elem);
-    //Pop_Stack(S);  
+    //printf("出栈元素为%d",elem);
+    Pop_Stack(S,elem);  
     Print_Stack(S);
     printf("\n%d\n",isEmpty(S));
 }

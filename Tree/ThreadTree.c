@@ -214,11 +214,11 @@ int main(){
     printf("输入先序序列建树:");
     Create_tree(T);
     //Create_PreThread(T);
-    //Create_InThread(T);
-    Create_PostThread(T);
+    Create_InThread(T);
+    //Create_PostThread(T);
     //Preorder(T);
-    //Inorder(T);                 //中序遍历 中序线索二叉树
+    Inorder(T);                 //中序遍历 中序线索二叉树
     //RevInorder(T);
-    Postorder(T);
+    //Postorder(T);
     return 0;
 }
