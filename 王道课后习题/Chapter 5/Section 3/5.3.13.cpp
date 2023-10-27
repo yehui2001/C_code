@@ -62,7 +62,7 @@ bool isEmpty(LinkStack &S){
 //递归建树  以先序遍历序列为例
 void Create_tree(BiTree &T){
     char c;
-    scanf("%c",&c);                 //输入的c序列和对应Create函数递归顺序应该与对应遍历序列一致
+    scanf("%c",&c);                 
     if(c =='#')                    
         T = NULL;                   
     else{
@@ -79,12 +79,12 @@ void visit(BiTree T){
     printf("%c",T->data);
 }
 
-//后序遍历
-void PostOrder(BiTree T){
+//前序遍历
+void preOrder(BiTree T){
     if(T!=NULL){
-        PostOrder(T->lchild);
-        PostOrder(T->rchild);
         visit(T);
+        preOrder(T->lchild);
+        preOrder(T->rchild);
     }
 }
 
@@ -93,10 +93,7 @@ void PostOrder(BiTree T){
 // 按照①再将结点依次入栈；否则，将栈顶元素出栈，并访问。
 
 
-void Find_ancestor(BiTree T,ElemType x){
-    LinkStack S;
-    Init_Stack(S);
-    //stack<BiTree> S;
+bool Find_ancestor(BiTree T,LinkStack &S,ElemType x){
     BiTNode *p = T;
     BiTNode *r = NULL;                          //r为临时指针，用于判断右孩子是否被访问过
     while(p||!isEmpty(S)){
@@ -111,31 +108,59 @@ void Find_ancestor(BiTree T,ElemType x){
             }
             else{
                 Pop(S,p);
-                if(p->data==x){
-                    while(!isEmpty(S)){
-                        GetTop(S,p);
-                        visit(p);
-                        Pop(S,p);
-                    }
-                exit(0);
-                }
-                //visit(p);
+                if(p->data==x)   //若弹出元素值为x，则停止程序，此时栈内元素均为x的祖先结点
+                    return true;    
                 r = p;
                 p = NULL;
             }
         }
     }
+    return false;
 }
 
-//Input:ACD###FH##G##
+bool Contain(LinkStack s,BiTNode *&r){
+    LinkStack q = s;
+    BiTNode *p;
+    while(q!=NULL){
+        GetTop(q,p);
+        if(p->data==r->data)
+            return true;
+        q = q->next;
+    }
+    return false;
+}
+
+//Alg thinking: By using two Linkstack to store the ancestor BiTNodes,and using a function to match the common Node
+bool ANCESTOR(BiTree t,ElemType p,ElemType q,BiTNode *&r){
+    LinkStack s1,s2;
+    Init_Stack(s1);
+    Init_Stack(s2);
+    Find_ancestor(t,s1,p);
+    Find_ancestor(t,s2,q);
+    while(!isEmpty(s1)){
+        GetTop(s1,r);
+        if(Contain(s2,r)){
+            cout << "最近祖先是" << r->data << endl;
+            return true;
+            break;
+        }
+        Pop(s1,r);
+    }
+    return false;
+}  
+
+//Input:ABD#M###CF##G##
 int main(){
     BiTree T;
+    BiTNode *r;
     ElemType x = 'D';
     printf("----------------------------------\n");
     printf("请输入带有#的扩充二叉树先根遍历序列:");//例如AB##CD###
     Create_tree(T);
-    cout << x << "所有的祖先结点值为:"<< endl;
-    Find_ancestor(T,x);
+    preOrder(T);
+    cout << endl;
+    if(ANCESTOR(T,'E','G',r))   cout << "找到祖先结点" << endl;
+    else cout << "未找到" << endl;
     printf("\n----------------------------------\n");
     return 0;
 }
