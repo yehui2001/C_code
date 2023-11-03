@@ -33,7 +33,7 @@ int Length_Queue(SqQueue &Q){
 }
 
 //入队
-bool In_Queue(SqQueue &Q,int x){
+bool EnQueue(SqQueue &Q,int x){
     if(Full_Queue(Q))     //判断队满
         return false;
     Q.data[Q.rear] = x;
@@ -43,7 +43,7 @@ bool In_Queue(SqQueue &Q,int x){
 }
 
 //出队
-bool Out_Queue(SqQueue &Q,int &x){
+bool DeQueue(SqQueue &Q,int &x){
     if(Empty_Queue(Q))
         return false;
     x = Q.data[Q.front];

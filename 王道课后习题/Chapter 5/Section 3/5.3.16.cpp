@@ -41,18 +41,20 @@ void PostOrder(BiTree T){
     }
 }
 
-//递归建树  以先序遍历序列为例
 void Create_tree(BiTree &T){
-    char c;
-    cin >> c;                 //输入的c序列和对应Create函数递归顺序应该与对应遍历序列一致
-    if(c =='#')                    
-        T = NULL;                   
-    else{
-        T = new BiTNode;
-        T->data = c;
-        Create_tree(T->lchild);
-        Create_tree(T->rchild);
-    }
+    ElemType c;
+    cout << "请输入要插入当前结点的data值,0代表当前结点为NULL:";
+    cin >> c;                 	  
+        if(c == '#'){                    
+            T = NULL;
+            return;
+        }                 
+        else{
+            T = new BiTNode;
+            T->data = c;
+            Create_tree(T->lchild);
+            Create_tree(T->rchild);
+        }
 }
 
 BiTNode *head,*pre = NULL;
