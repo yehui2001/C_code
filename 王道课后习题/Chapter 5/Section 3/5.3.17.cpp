@@ -43,25 +43,27 @@ void PostOrder(BiTree T){
 
 //递归建树  以先序遍历序列为例
 void Create_tree(BiTree &T){
-    char c;
+    ElemType c;
+    cout << "请输入要插入当前结点的data值,0代表当前结点为NULL:";
     cin >> c;                 	  
-    if(c =='#')                    
-        T = NULL;                   
-    else{
-        T = new BiTNode;
-        T->data = c;
-        Create_tree(T->lchild);
-        Create_tree(T->rchild);
-    }
+        if(c == '#'){                    
+            T = NULL;
+        }                 
+        else{
+            T = new BiTNode;
+            T->data = c;
+            Create_tree(T->lchild);
+            Create_tree(T->rchild);
+        }
 }
 
 bool Judge_Similarity(BiTree t1,BiTree t2){
-    if(!t1 && !t2)    //若两个都为空，则相似
+    if(t1==NULL && t2==NULL)    //若两个都为空，则相似
         return true;
-    if(!t1 || !t2)    //若只有一个为空，注意此处已经筛选了t1和t2同时为空的情况（上一个if）
+    if(t1==NULL || t2==NULL)    //若只有一个为空，注意此处已经筛选了t1和t2同时为空的情况（上一个if）
         return false;   
     else{             //两个都是根结点则继续
-        if(Judge_Similarity(t1->lchild,t2->lchild) && Judge_Similarity(t2->rchild,t2->rchild))  //左右子树都满足，才算是相似
+        if(Judge_Similarity(t1->lchild,t2->lchild) && Judge_Similarity(t1->rchild,t2->rchild))  //左右子树都满足，才算是相似
             return true;
         else
             return false;           //若至少有一对结点不满足，则返回false，由于是取并运算，故认定两树不相似

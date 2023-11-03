@@ -55,8 +55,6 @@ bool EmptyStack(LinkStack &S){
     return (S==NULL);
 }
 
-
-
 void InitQueue(LinkQueue &Q){
     Q.front = Q.rear = new QNode;                           //建立头节点
     Q.front->next = NULL;                                  //初始为空
