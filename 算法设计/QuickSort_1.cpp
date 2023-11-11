@@ -12,8 +12,8 @@ int Partition(int a[],int p,int r){
             p++;
         a[r] = a[p];
     }
-    a[p] = temp;
-    return p;
+    a[r] = temp;
+    return r;
 }
 
 void QuickSort(int a[],int p,int r){   
