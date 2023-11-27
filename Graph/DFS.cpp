@@ -115,11 +115,11 @@ void DFS(ALGraph *G,int *visited,int index){ //类似于二叉树的层次遍历
     CreateQueue(Q,G->numV);
     visit(G,index);
     visited[index] = true;
-    EnQueue(Q,index);
+    EnQueue(Q,index);                                                    //第index个结点进队
     while(!EmptyQueue(Q)){
         DeQueue(Q,index);
-        for(EdgeNode *w = G->adjlist[index].firstEdge; w ; w = w->next)  //遍历第v个结点的边表
-            if(w && !visited[w->index]){
+        for(EdgeNode *w = G->adjlist[index].firstEdge; w ; w = w->next)  //遍历第index个结点的边表
+            if(w && !visited[w->index]){                                 //若边表中有结点，则优先遍历
                 DFS(G,visited,w->index);
             }
     }
@@ -141,7 +141,7 @@ int main(){
     ALGraph G;
     CreateGraph(&G);
     DispGraph(&G);
-    cout << "BFS序列为:" << endl;
+    cout << "DFS序列为:" << endl;
     DFSTraverse(&G);
     cout << endl;
     return 0;

@@ -96,6 +96,7 @@ void Find_Common_suffix(LinkList L1,LinkList L2){
     cout <<"公共后缀位置位于倒数第"<< Tag << "位置" << endl;
 }
 
+
 //王道书答案
 //以尾部对齐，让长链的指针移动到与短链起点相同的位置。
 //一起向后查找公共结点

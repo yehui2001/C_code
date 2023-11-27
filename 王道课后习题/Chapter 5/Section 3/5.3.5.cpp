@@ -59,7 +59,7 @@ void Create_tree(BiTree &T){
 int Depth_NonRecur(BiTree &T){
     if(!T)
         return 0;
-    int rear = 0,front = 0;            //rear指向队尾元素下一个位置，front指向队头元素
+    int rear = 0,front = 0;             //rear指向队尾元素下一个位置，front指向队头元素
     int last = 0,level = 0;             //last用来指向当前层最右结点，level指向当前深度
     BiTree Q[MaxSize];                  //定义一个指针队列
     Q[rear++] = T;                      //根结点入队

@@ -64,8 +64,8 @@ void InsertSort(int A[],int n){
                 A[j] = A[j-1];                   //直到某个结点的前一个结点<=temp，则该结点的位置即插入位置  
             A[j] = temp;                         //复制到插入位置
         }
+        Print(A);
     }
-    Print(A);
 }
 
 /*

@@ -19,7 +19,6 @@ bool Init_List(LinkList &L){
     if(L==NULL)
         return false;                       //申请内存失败
     L->next = NULL;                         //此时头节点也作为尾结点应该指向空指针
-    //cout << "初始化函数中L的地址:"<<&L<< endl; //加取地址符是返回L指针的地址
     return true;                            //不加地址符是返回L地址所指对象的地址
 }
 
@@ -35,6 +34,14 @@ LNode *Get_Elem_Address(LinkList &L,int i){
         j++;
     }
     return p;                               //返回前驱结点的地址，注意此处也可能是空指针
+}
+
+LNode *Get_Elem_Address(LinkList &L,ElemType e){
+    LNode *p = L->next;
+    while(p && p->data!=e){
+        p = p->next;
+    }
+    return p;
 }
 
 //在i个位置插入结点
@@ -81,6 +88,7 @@ LinkList Create_List_head(LinkList &L){
     }
     return L;
 }
+
 //打印单链表
 void Print_Linklist(LinkList &L){
     LNode *p = L->next;                      //从头指针后的第一个结点开始打印
@@ -91,6 +99,7 @@ void Print_Linklist(LinkList &L){
     }
     cout << endl;
 }
+
 //删除结点（直接删除第i个结点）
 bool Delete_Linklist_1(LinkList &L,int i){
     LNode *p,*q;
@@ -102,6 +111,7 @@ bool Delete_Linklist_1(LinkList &L,int i){
     free(q);
     return true;
 }
+
 //删除结点（通过删除该结点的后继i+1结点来达到目的）
 bool Delete_Linklist_2(LinkList &L,int i){
     LNode *p,*q;
@@ -114,6 +124,7 @@ bool Delete_Linklist_2(LinkList &L,int i){
     free(q);
     return true;
 }
+
 // 获取单链表长度 不计入头节点
 int Length_Linklist(LinkList &L) {
     int len = 0;
@@ -129,6 +140,7 @@ int main(){
     LinkList L;
     Init_List(L);
     Create_List_tail(L);
+    cout << Get_Elem_Address(L,2) << endl;
     Print_Linklist(L);
     return 0;
 }
