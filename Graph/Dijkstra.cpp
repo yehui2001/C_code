@@ -65,7 +65,7 @@ void Dijkstra(AdjMatrix *G,int start){
     start--;
     int flag[MAXSIZE];                              //访问标记数组
     int dist[MAXSIZE];                              //其他顶点到start结点到距离
-    int prevs[MAXSIZE];
+    int prevs[MAXSIZE];                             //存放枢轴元素(当前离源最短结点)
     int k = start;
     for(int i = 0; i < G->numV; i++){
         dist[i] = G->Edge[start][i];                //初始化start到各顶点距离
@@ -95,11 +95,10 @@ void Dijkstra(AdjMatrix *G,int start){
 
     //打印
     for(int i = 0; i < G->numV; i++)
-        i == start?cout <<'\t'<<0<<endl:cout <<'\t'<< G->Vertex[prevs[i]]<;
+        i == start?cout <<'\t'<<0:cout <<'\t'<< G->Vertex[prevs[i]];
     cout << endl;
     for(int i = 0; i < G->numV; i++)
         cout <<"\t"<< dist[i];
-
 
 }
             

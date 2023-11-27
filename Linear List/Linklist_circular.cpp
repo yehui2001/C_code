@@ -29,9 +29,9 @@ LinkList Create_List_tail(LinkList &L){
         s->data = x;
         r->next = s;                        //在表尾插入新结点
         r = s;                              //令表尾指针始终指向表尾
-        cin >> x;                     //若cin >> “%d”里面有其他内容，输入时需要一并键入
+        cin >> x;                     
     }
-    r->next = L;                            //尾结点置空
+    r->next = L;                            //尾结点指向表头
     return L;
 }
 

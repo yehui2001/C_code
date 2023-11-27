@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-#define MAXSIZE 100
+#define MAXSIZE 10
 #define INFINITE 9999
 
 typedef struct Graph{

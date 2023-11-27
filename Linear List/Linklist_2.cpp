@@ -47,7 +47,7 @@ LinkList Create_List_tail(LinkList &L){
             s->next = NULL;
             L = s;                              //令新创建的结点作为第一个结点
             r = s;                              //令表尾指针始终指向表尾
-            cin >> x;                     //若scanf“%d”里面有其他内容，输入时需要一并键入
+            cin >> x;                     
         }
         else{
             s = (LNode*)malloc(sizeof(LNode));

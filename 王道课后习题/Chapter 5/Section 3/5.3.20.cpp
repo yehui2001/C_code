@@ -2,67 +2,55 @@
 using namespace std;
 
 typedef char ElemType;
-typedef struct BiTNode
-{
-    ElemType data;
-    struct BiTNode *lchild, *rchild;
-}BiTNode,*BiTree;
 
-//访问该结点，并打印该值
-void visit(BiTree T){
-    if(T!=NULL)
-    cout << T->data;
-}
+typedef struct node{
+    char data;
+    struct node *left, *right;
+}BTree;
 
-//前序遍历
-void preOrder(BiTree T){
-    if(T!=NULL){
-        visit(T);
-        preOrder(T->lchild);
-        preOrder(T->rchild);
+BTree  *Create(BTree *T){
+    char data;
+    cout << "data  = " << endl;
+    cin >> data;
+    if(data!='#'){
+        T = new BTree;
+        T->data = data;
+        T->left = NULL;
+        T->right = NULL;
+        T->left = Create(T->left);
+        T->right = Create(T->right);
     }
+    return T;
 }
 
-//中序遍历
-void InOrder(BiTree T){
-    if(T!=NULL){
-        InOrder(T->lchild);
-        visit(T);
-        InOrder(T->rchild);
-    }
-}
+/*
+    算法思想:
+        1.采用中序遍历获得中缀表达式，因为运算符是双目运算符，而其左右孩子为操作数，故采用中序遍历
+        2.在根结点和叶子结点处无法加括号
+        3.中序遍历过程中，在输出左结点前加括号，在输出右结点后加括号
 
-//后序遍历
-void PostOrder(BiTree T){
-    if(T!=NULL){
-        PostOrder(T->lchild);
-        PostOrder(T->rchild);
-        visit(T);
-    }
-}
+*/
 
-//递归建树  以先序遍历序列为例
-void Create_tree(BiTree &T){
-    ElemType c;
-    cout << "请输入要插入当前结点的data值,0代表当前结点为NULL:" ;
-    cin >> c;                 	  
-    if(c =='#'){                   
-        T = NULL;                   
-        return;                   
-    }		
-    else{
-        T = new BiTNode;
-        T->data = c;
-        Create_tree(T->lchild);
-        Create_tree(T->rchild);
+void PutInExp(BTree *T,int deep){
+    if(T==NULL)
+        return;
+    if(!T->left && !T->right)               //叶子结点不添加括号
+        cout << T->data;
+    else{                                   //根结点deep为1
+        if(deep>1)  cout << "(";            //非根结点，添加左括号
+        PutInExp(T->left,deep+1);
+        cout << T->data;
+        PutInExp(T->right,deep+1);
+        if(deep>1)  cout << ")";
     }
 }
 
 //Input:AB##CD### ABD#M###CF##G##
 int main(){
-    BiTree T;
+    BTree *T;
     cout << "----------------------------------" << endl;
-    cout << "请输入带有#的扩充二叉树先根遍历序列:" << endl;
-    Create_tree(T);
+    T = Create(T);
+    cout << "中缀表达式：" << endl;
+    PutInExp(T,1);
     return 0;
 } 

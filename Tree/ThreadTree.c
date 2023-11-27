@@ -8,8 +8,8 @@ typedef struct ThreadNode
     struct ThreadNode *lchild,*rchild;      //左右孩子指针
     int ltag,rtag;                          //左右线索标志，用以表示左右孩子指针是指向左（右）孩子还是前驱（后继）
 } * ThreadTree;
-ThreadNode *pre = NULL;
 
+ThreadNode *pre = NULL;
 //访问该结点，并打印该值                        pre指向当前访问结点的前驱
 void visit(ThreadNode *q){
     if(q->lchild==NULL){                    
@@ -21,7 +21,7 @@ void visit(ThreadNode *q){
         pre->rtag = 1;
     }
     pre = q;                                //pre指针向后访问
-    //printf("%c",T->data);
+    printf("%c",T->data);
 }
 
 //中序线索二叉树的构造

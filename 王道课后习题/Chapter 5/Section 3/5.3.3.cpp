@@ -117,6 +117,40 @@ void PostOrder_Nonrecur(BiTree T){
     }
 }
 
+void InOrder_Nonrecur(BiTree T){
+    LinkStack S;
+    Init_Stack(S);                          //初始化栈S
+    BiTNode *p = T;                         //p是遍历指针
+    while(p||!isEmpty(S)){                  //栈不空或p不空时循环
+        if(p){                              //若左孩子不为空，则一直入栈 
+            Push(S,p);                          
+            p = p->lchild;                  //遍历左孩子
+        }
+        else{
+            Pop(S,p);                       //出栈
+            visit(p);
+            p = p->rchild;                  //遍历右孩子
+        }
+    }
+}
+
+
+void PreOrder_Nonrecur(BiTree T){
+    LinkStack S;
+    Init_Stack(S);                          //初始化栈S
+    BiTNode *p = T;                         //p是遍历指针
+    while(p||!isEmpty(S)){                  //栈不空或p不空时循环
+        if(p){                              //若左孩子不为空，则一直入栈 
+            visit(p);                       //访问
+            Push(S,p);                          
+            p = p->lchild;                  //遍历左孩子
+        }
+        else{
+            Pop(S,p);                       //出栈
+            p = p->rchild;                  //遍历右孩子
+        }
+    }
+}
 
 int main(){
     BiTree T;

@@ -25,6 +25,13 @@ void Print_List(Seqlist &L){
     cout << endl;
 }
 
+/*算法思想
+    先整体倒置，然后分别调整前半部分跟后半部分。 
+    a代表数组前p个元素，b代表数组中余下的n-p个元素
+    ab -> (ab)' = b'a' ->(b')'(a')' = ba
+*/
+
+
 void Swap(int &a,int &b){
     int temp = a;
     a = b;
@@ -36,11 +43,6 @@ void Reverse(Seqlist &L,int left,int right){
     for(int i = 0; i <= (right+left)/2 - left; i++) //除法默认向下取整，等于的情况需要考虑（0+9）/2 = 4,A[4]需要与A[5]交换
         Swap(L.data[left+i],L.data[right-i]);
 }
-
-/*算法思想
-    先整体倒置，然后分别调整前半部分跟后半部分。
-    ab -> (ab)' = b'a' ->(b')'(a')' = ba
-*/
 
 void Divert(Seqlist &L,Elemtype p){
     Reverse(L,0,L.length-1);

@@ -118,9 +118,8 @@ void Invert_LevelOrder(BiTree T){
     EnQueue(Q,T);
     while(!EmptyQueue(Q)){
         DeQueue(Q,p);
-        
         Push(S,p);
-        //visit(p);
+        
         if(p->lchild!=NULL)
             EnQueue(Q,p->lchild);
         if(p->rchild!=NULL)

@@ -220,13 +220,13 @@ int main(){
     //InsertSort(num,lens);
     //printf("直接插入排序:\n");
     //Print(num);
-    //Half_InsertSort(num,lens);
-    //printf("折半插入排序:\n");
+    Half_InsertSort(num,lens);
+    printf("折半插入排序:\n");
     //ShellSort(num,lens);
     //printf("希尔排序:\n");
     //BubbleSort_front(num,lens);
     //Print(num);
-    QuickSort(num,0,lens-1);
+    //QuickSort(num,0,lens-1);
     //SelectSort(num,lens);
     //HeadSort(num,lens);
     Print(num);
