@@ -40,10 +40,11 @@ int select(int a[],int p,int r,int k){   //p为初始下标，r为结束下标
     else return select(a,p,i,k);         //若k小于i之前值的个数，说明第k个值在前半部分
 }
 
+
 int main(){
 
-    int k = 10;
-    int a[10] = {3,1,5,8,2,9,18,5,4,6};
+    int k = 8;
+    int a[10] = {3,1,5,8,2,9,18,14,4,6};
     cout<< "第" << k << "个数是:"<< select(a,0,9,k) << endl;
     return 0;
 }

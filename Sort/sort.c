@@ -135,6 +135,7 @@ void BubbleSort_front(int A[],int n){
     }   
 }
 
+
 //排序一趟，返回序列中首个元素的位置
 int Partition(int A[],int low,int high){
     int pivot = A[low];                         //选择当前表中第一个元素作为枢轴(待排元素)，对表进行划分
