@@ -68,6 +68,7 @@ void InsertSort(int A[],int n){
     }
 }
 
+
 /*
     希尔排序:
         用一个增量将待排序表分割成若干子表
@@ -89,6 +90,19 @@ void ShellSort(int A[],int n){
     Print(A);
 }
 
+
+/*
+    冒泡排序:
+        从后往前交换值，将最小值冒泡到表头，依此进行n-1趟
+    空间复杂度:O(1)
+    时间复杂度:最好情况O(n),平均情况O(n^2)
+*/
+void BubbleSort(int A[],int n){
+		for(int i = 0; i < n-1; i++)                //共进行n-1趟排序
+			for(int j = n-1; j > i; j--)            //向前查找
+				if(A[j] < A[j-1])                   //若前一个元素值比该元素大，则交换值
+					swap(A[j],A[j-1]);
+}
 
 /*
     快速排序:
@@ -213,11 +227,11 @@ int main(){
     ///Bionary_Sort(A,n);
     //InsertSort(A,n);
     //ShellSort(A,n);
-    //BubbleSort(A,n);
+    BubbleSort(A,n);
     //QuickSort(A,0,n-1);
     //SelectSort(A,n);
     //MergeSort(A,0,n-1);
-    HeapSort(A,10);
-    //Print(A);
+    //HeapSort(A,10);
+    Print(A);
     return 0;
 }
