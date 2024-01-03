@@ -77,7 +77,6 @@ int main(){
     char *str;
     printf("请输入想要检验的括号序列:");
     scanf("%s",str);
-    int i = 0;
     printf("Length = %d\n",strlen(str));
     if(bracketCheck(str,strlen(str)))
         printf("括号序列匹配成功");
