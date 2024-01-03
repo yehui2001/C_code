@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 #define maxSize 10
-//
+//         
 
 void MatrixChain(int p[],int n,int m[][maxSize],int s[][maxSize]){          //p用来存放A[1;n]的行列数(其中共有n+1个元素，A1的列等于A2的行)，n是矩阵总个数，m是从第i个矩阵连乘到第j个矩阵的计算量，s是最优解下标
     for(int i = 1; i <= n; i++) m[i][i] = 0;            //序列中只有一个元素的时候，无需连乘
@@ -25,7 +25,7 @@ void MatrixChain(int p[],int n,int m[][maxSize],int s[][maxSize]){          //p�
         for(int t=1;t<i;t++) cout<<"\t";
 		for(int j=i;j<=n;++j)
 			{
-				cout<<m[i][j]<<"\t";
+				cout << m[i][j] << "\t";
 				if(j==n) cout<<endl;
 			}
     }
