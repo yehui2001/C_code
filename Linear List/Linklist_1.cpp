@@ -36,7 +36,7 @@ LNode *Get_Elem_Address(LinkList &L,int i){
     return p;                               //返回前驱结点的地址，注意此处也可能是空指针
 }
 
-LNode *Get_Elem_Address(LinkList &L,ElemType e){
+LNode *Get_Elem_Address2(LinkList &L,ElemType e){
     LNode *p = L->next;
     while(p && p->data!=e){
         p = p->next;
@@ -136,11 +136,25 @@ int Length_Linklist(LinkList &L) {
     return len;
 }
 
+LNode* ReverseList(LNode* head) {
+    // write code here
+    LNode *p = head->next,*q;
+    head->next = nullptr;
+    while(p!=nullptr){
+        q = p->next;                //记录后续结点
+        p->next = head->next;       //接上head后面的结点
+        head->next = p;             //插入结点
+        p = q;                      //更新当前插入结点
+    }
+    return head;
+}
+
 int main(){
     LinkList L;
     Init_List(L);
     Create_List_tail(L);
-    cout << Get_Elem_Address(L,2) << endl;
+    //cout << Get_Elem_Address(L,2) << endl;
+    ReverseList(L);
     Print_Linklist(L);
     return 0;
 }
