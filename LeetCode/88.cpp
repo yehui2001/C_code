@@ -22,8 +22,6 @@ void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
     for(k = 0; k < m+n; k++)
         nums1[k] = b[k];
 }
-
-
     
 int main(){
     vector<int>nums1 = {1,2,7,0,0,0};
