@@ -17,6 +17,7 @@ int LISlength(int a[],int n){
     return len;
 }
 
+
 int main(){
     int a[] = {0,1,5,3,4,2,8};
     int n = sizeof(a)/sizeof(int)-1;
