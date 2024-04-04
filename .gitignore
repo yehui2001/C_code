@@ -1,6 +1,8 @@
 # Ignore all 忽略所有文件
 *
-
+# 忽略指定文件夹
+ /算法设计
+/.vscode
 # Unignore files with specific extensions 设置你不想忽略的文件
 !*.c
 !*.cpp
@@ -10,6 +12,6 @@
 !*.md
 !*.pdf
 !*.gitignore
-!*.vscode
+#!*.vscode
 # Unignore all dirs  忽略所有空文件夹
 !*/
