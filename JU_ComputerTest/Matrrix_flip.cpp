@@ -2,7 +2,7 @@
 #include<vector> 
 using namespace std;
 
-
+//水平翻转
 void flip_horizontal(int **matrix,int row, int col){
     int temp;
 	for(int i = 0; i < row; i++)
@@ -13,6 +13,7 @@ void flip_horizontal(int **matrix,int row, int col){
         }
 } 
 
+//垂直翻转
 void flip_vertical(int **matrix,int row, int col){
     int temp;
 	for(int i = 0; i < row/2; i++)

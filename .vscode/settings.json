@@ -97,5 +97,10 @@
         "ranges": "cpp",
         "algorithm": "cpp",
     },
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "C_Cpp.default.compilerPath": "/usr/bin/clang",
+    "cSpell.words": [
+        "Bionary",
+        "pivotpos"
+    ]
 }

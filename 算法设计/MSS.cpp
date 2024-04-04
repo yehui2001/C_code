@@ -13,7 +13,7 @@ int Maxsum(int a[],int n){
 }
 
 int main(){
-    int a[] = {0,-2,11,-4,13,-5,-2};
+    int a[] = {-2,1,-3,4,-1,2,1,-5,4};
     cout << "Maxsum = "<< Maxsum(a,sizeof(a)/sizeof(int)-1) << endl;
     return 0;
 }

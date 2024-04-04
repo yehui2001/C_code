@@ -31,7 +31,7 @@ void Bionary_Sort(int A[],int n){
         low = 0;                    //每次要查找位置时候，有序表的始点下标重新赋值为0
         high = i-1;                 //要插入第i+1个元素，当前的有序表的长度显然为i（下标从0开始）
         
-        //查找操作
+        //查找操作 
         while(low <= high){
             mid = (low+high)/2;     //取有序序列中的中间元素的值
             if(A[mid] > temp)       
@@ -99,7 +99,7 @@ void ShellSort(int A[],int n){
 */
 void BubbleSort(int A[],int n){
 		for(int i = 0; i < n-1; i++)                //共进行n-1趟排序
-			for(int j = n-1; j > i; j--)            //向前查找
+			for(int j = n-1; j > i; j--)            //从后向前查找
 				if(A[j] < A[j-1])                   //若前一个元素值比该元素大，则交换值
 					swap(A[j],A[j-1]);
 }
@@ -224,7 +224,7 @@ int main(){
     int n = sizeof(A)/sizeof(int);
     cout << "原序列为:" << endl;
     Print(A);
-    ///Bionary_Sort(A,n);
+    ///Binary_Sort(A,n);
     //InsertSort(A,n);
     //ShellSort(A,n);
     BubbleSort(A,n);
